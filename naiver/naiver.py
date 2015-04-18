@@ -38,22 +38,23 @@ class HTTPRequest(object):
         return self._args
     
     def args_post(self):
-        content_length = int(self._env.get('CONTENT_LENGH'),0)
+        content_length = int(self._env.get('CONTENT_LENGTH','0'))
+        #debug
         request_body = self._env['wsgi.input'].read(content_length)
         body_parsed = urlparse.parse_qs(request_body)
         self._args = dict()
-        for k,v in body_parsed:
-            self._args[k] = v
+        for k in body_parsed:
+            self._args[k] = body_parsed[k][0]
         return self._args
 
-    def get(self,key,default = None):
+    def get(self,key,default=None):
         """get args"""
         if self._args:
             return self._args.get(key,default)
         if self.method.upper()=='GET':
-            self.args_get().get(key,default)
+            return self.args_get().get(key,default)
         else:
-            self.args_post().get(key,default)
+            return self.args_post().get(key,default)
 
 
     @property

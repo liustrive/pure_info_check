@@ -16,7 +16,6 @@ class Router(object):
         self._vars = vars
 
     def get(self,path,method):
-        print path,method
         for pattern, handlerName in self._urls:
             m = re.match('^' + pattern + '$',path)
             if m:
