@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title> Platform-info</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+ <body>
+
+ <div style="margin:1.5em; text-align:center">
+     <strong> 平台服务部 &nbsp; &nbsp;  &nbsp; &nbsp;信息查询</strong>
+ </div>
+ <form class="well form-search" action="/index" method="POST" style="text-align:center">
+     <input type="text" class="input-medium" placeholder="name" name="name" value="{{ search_name }}"/><button type="submit" class="btn">Search</button>
+ </form>
+ <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+     <TR>
+         <TD> 姓名 </TD>
+         <TD> 性别 </TD>
+         <TD> POPO </TD>
+         <TD> 所属组 </TD>
+         <TD> 组负责人 </TD>
+     </TR>
+     {% for item in fellows %}
+     <TR>
+         <TD>{{ item['name'] }}</TD>
+         <TD>{{ item['sex'] }}</TD>
+         <TD>{{ item['popo'] }}</TD>
+         <TD>{{ item['group_name'] }}</TD>
+         <TD>{{ item['leader'] }}</TD>
+     </TR>
+     {% endfor %}
+  </table>
+</body>
+</html>
