@@ -16,6 +16,11 @@ class InfoService(object):
     def show_info(self,name=''):
         sql = "call list_fellow('%s');" % escape_string(name)
         return self.db.db_exec(sql)
-
-    def test_info(self):
-        return self.db.db_exec("call list_fellow('')");
+    
+    def get_groups(self):
+        sql = "call show_groups();"
+        return self.db.db_exec(sql)
+    
+    def add_info(self,name,sex,popo,group):
+        sql = "call add_info('%s',%d,'%s',%d)" % (escape_string(name),sex,escape_string(popo),group)
+        return self.db.db_exec(sql)

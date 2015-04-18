@@ -1,0 +1,48 @@
+{% extends 'frame.html' %}
+{% block main %}
+
+<div style="margin:1.5em;text-align:center">
+    <form class="form-horizontal well" action="/addinfo" method="POST">
+    <input type='hidden' name='csrf_token' value='{{ csrf_token }}'/>
+    <legend>添加信息</legend>
+    <div class="form-group">
+        <p class="text-danger">{{ server_msg }}</p>
+        <label for="inputName" class="col-sm-2 control-label">姓名</label>
+        <div class="col-sm-10">
+            <input type='text' placeholder="姓名" name='name' class="form-control" id ="inputName"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="select01">性别</label>
+        <div class="col-sm-10">
+            <select id="select01" class="form-control" name="sex">
+                <option value="1">男</option>
+                <option value="0">女</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPopo" class="col-sm-2 control-label">POPO</label>
+        <div class="col-sm-10">
+            <input type="text" placeholder="POPO" class="form-control" name="popo" id="input02">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="select02">所属组</label>
+		<div class="col-sm-10">
+            <select id="select02" name="group" class="form-control">
+                {% for group in groups %}
+                <option value="{{ group['groupID'] }}">{{ group['group_name'] }}</option>
+                {% endfor%}
+            </select>
+        </div>
+     </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">提交</button><a href='/index' class="btn btn-info" style="margin-left:25px" role='button'>返回</a>
+   </div>
+
+</form>
+</div>
+
+<div>
+{% endblock %}
